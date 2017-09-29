@@ -12,16 +12,16 @@ function notify(type, message) {
 
 function findType (type) {
   switch (type) {
-    case '0':
+    case '0', 0:
       return "Admin"
       break;
-    case '1':
+    case '1', 1:
       return "Standart User"
       break;
-    case '2':
+    case '2', 2:
       return "Only Log"
       break;
-    case '3':
+    case '3', 3:
       return "Read Only"
       break;
     default:
@@ -49,6 +49,15 @@ navbar.config(['$routeProvider', function($routeProvider) {
   .when('/logout', {
     template: '',
     controller: 'LogoutCtrl'
+  });
+}]);
+
+navbar.controller('NavbarCtrl', ['$scope','cesiService', '$rootScope', function ($scope, cesiService, $rootScope) {
+  cesiService.userInfo().then(function (data) {
+      $rootScope.username = data['username'];
+      $rootScope.usertype = findType(data['usertypecode']);
+      document.getElementById('show-account').innerHTML = data['username'] + " (" + $rootScope.usertype + ")";
+      document.getElementById('username').innerHTML = data['username'];
   });
 }]);
 
