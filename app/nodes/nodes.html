@@ -2,101 +2,52 @@
 
 <html ng-app="myApp">
 <head>
-    <link rel="stylesheet"; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
-
+    <link rel="stylesheet" href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<div class="card">
-    <div class="header">
-        <h4 class="title">Nodes</h4>
-        <p class="category">Processes for srv2</p>
-     </div>
-     <tr ng-controller="NodesCtrl" class="content table-responsive table-full-width">
+    <div ng-controller="NodesCtrl" class="content">
+        <div class="containter-fluid">
+            <div class="row">
+                <div class="col-md-12">
 
-                                <tr ng-table="scope.nodes" class="table table-condensed table-bordered table-striped" show-filter="true">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Pid</th>
-                                            <th>Group</th>
-                                            <th>Uptime</th>
-                                            <th>State</th>
+                    <td><input type="button" value="Refresh" ng-click="load()" ng-disabled="flag"></td>
+                    <div ng-repeat="(key1,value1) in nodelist" class="card">
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                        <div class="header">
 
-                                        <div ng-repeat="node in nodes">
-                                            <tr>
-                                                <div ng-repeat="process in processes">
-                                                    <td data-title="Name" filter="{ name: 'text'}" sortable="'name'">{{process.name}}</td>
-                                                    <td data-title="Pid" filter="{ pid: 'number'}" sortable="'pid'">{{process.pid}}</td>
-                                                    <td data-title="Group" filter="{ group: 'text'}" sortable="'group'">{{process.group}}</td>
-                                                    <td data-title="Uptime" filter="{ uptime: 'time'}" sortable="'uptime'">{{process.uptime}}</td>
-                                                    <td data-title="State" filter="{ state: 'text'}" sortable="'state'">{{process.statename}}</td>
-                                                    <td>
-                                                        <input type="button" value="restart" ng-click="restart(process)">
-                                                        <input type="button" value="start" ng-click="start(process)">
-                                                        <input type="button" value="stop" ng-click="stop(process)">
-                                                    </td>
-                                                </div>
-                                            </tr>
-                                        </div>
+                            <h4 class="title">Processes for {{value1}}</h4>
 
-                                    </tbody>
-
-                                    <!--<tr ng-repeat="node in nodes">
-                                        <td>node test</td>
-                                    </tr>-->
-
-                                    <!--<tbody>
-                                        <tr>
-                                        	<td>{{nodes[0].pid}}</td>
-                                        	<td>Dakota Rice</td>
-                                        	<td>$36,738</td>
-                                        	<td>Niger</td>
-                                        	<td>Oud-Turnhout</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>2</td>
-                                        	<td>Minerva Hooper</td>
-                                        	<td>$23,789</td>
-                                        	<td>Curaçao</td>
-                                        	<td>Sinaai-Waas</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>3</td>
-                                        	<td>Sage Rodriguez</td>
-                                        	<td>$56,142</td>
-                                        	<td>Netherlands</td>
-                                        	<td>Baileux</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>4</td>
-                                        	<td>Philip Chaney</td>
-                                        	<td>$38,735</td>
-                                        	<td>Korea, South</td>
-                                        	<td>Overland Park</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>5</td>
-                                        	<td>Doris Greene</td>
-                                        	<td>$63,542</td>
-                                        	<td>Malawi</td>
-                                        	<td>Feldkirchen in Kärnten</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>6</td>
-                                        	<td>Mason Porter</td>
-                                        	<td>$78,615</td>
-                                        	<td>Chile</td>
-                                        	<td>Gloucester</td>
-                                        </tr>
-                                    </tbody>-->
-                                </table>
-
-                            </div>
                         </div>
+                        <div class="content table-responsive table-full-width">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <th>Name</th>
+                                    <th>Pid</th>
+                                    <th>Group</th>
+                                    <th>Uptime</th>
+                                    <th>State</th>
+                                </thead>
+                                <tbody>
+                                    <tr  ng-repeat="(key2,value2) in nodes[key1]">
+                                        <td data-title="Name" filter="{ name: 'text'}" sortable="'name'">{{value2.name}}</td>
+                                        <td data-title="Pid" filter="{ pid: 'number'}" sortable="'pid'">{{value2.pid}}</td>
+                                        <td data-title="Group" filter="{ group: 'text'}" sortable="'group'">{{value2.group}}</td>
+                                        <td data-title="Uptime" filter="{ uptime: 'time'}" sortable="'uptime'">{{value2.uptime}}</td>
+                                        <td data-title="State" filter="{ state: 'text'}" sortable="'state'">{{value2.statename}}</td>
+                                        <td><input type="button" value="Restart"  ng-click="restart(key1,value1,value2)" ng-disabled="flag[key1]"></td>
+                                        <td><input type="button" value="Start" ng-click="start(key1,value1,value2)" ng-disabled="flag[key1]"></td>
+                                        <td><input type="button" value="Stop" ng-click="stop(key1,value1,value2)" ng-disabled="flag[key1]"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.js"></script>
   <script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
 
@@ -127,5 +78,5 @@
     <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
-</body>
+
 </html>

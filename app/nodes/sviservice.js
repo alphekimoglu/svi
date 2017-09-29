@@ -2,22 +2,11 @@
 angular.module('cesiLib',[])
 
 
-.factory('cesiService',['$http', '$q', '$rootScope', function($http,$q,$rootScope) {
-
+.factory('cesiService',['$http','$q', function($http,$q) {
+     var path = 'http://192.168.1.155:5000/node/';
      return {
-         list : function () {
-             var deferred =$q.defer();
-             $http.get('http://192.168.1.155:5000/node/name/list')
-             .then(function (response) {
-                 deferred.resolve(response.data);
-             })
-             .catch(function (response) {
-                 deferred.reject(response);
-             });
-             return  deferred.promise;
-         },
 
-         dashboard : function () {
+        dashboard : function () {
              var deferred =$q.defer();
              $http.get('http://192.168.1.155:5000/dashboard')
              .then(function (response) {
@@ -83,10 +72,11 @@ angular.module('cesiLib',[])
              return  deferred.promise;
          },
 
-         load : function () {
+         reload : function (node) {
              var deferred =$q.defer();
-             $http.get('http://192.168.1.155:5000/node/srv2')
+             $http.get(path+node)
              .then(function (response) {
+
                  deferred.resolve(response.data);
              })
              .catch(function (response) {
@@ -143,9 +133,24 @@ angular.module('cesiLib',[])
              return  deferred.promise;
          },
 
-         restart : function (process) {
+         load : function () {
              var deferred =$q.defer();
-             $http.get('http://192.168.1.155:5000/node/srv2/process/'+process.name+':'+process.group+'/restart')
+             $http.get(path+'name/list')
+             .then(function (response) {
+
+
+                 deferred.resolve(response.data);
+             })
+             .catch(function (response) {
+                 deferred.reject(response);
+             });
+             return  deferred.promise;
+         },
+
+
+         restart : function (node,process) {
+             var deferred =$q.defer();
+             $http.get(path+node+'/process/'+process.name+':'+process.group+'/restart')
              .then(function (response) {
                 deferred.resolve(response);
              })
@@ -155,9 +160,9 @@ angular.module('cesiLib',[])
              return deferred.promise;
          },
          
-         start : function (process) {
+         start : function (node,process) {
              var deferred =$q.defer();
-             $http.get('http://192.168.1.155:5000/node/srv2/process/'+process.name+':'+process.group+'/start')
+             $http.get(path+node+'/process/'+process.name+':'+process.group+'/start')
              .then(function (response) {
                 deferred.resolve(response);
              })
@@ -167,9 +172,9 @@ angular.module('cesiLib',[])
              return deferred.promise;
          },
 
-         stop : function (process) {
+         stop : function (node,process) {
              var deferred =$q.defer();
-             $http.get('http://192.168.1.155:5000/node/srv2/process/'+process.name+':'+process.group+'/stop')
+             $http.get(path+node+'/process/'+process.name+':'+process.group+'/stop')
              .then(function (response) {
                 deferred.resolve(response);
              })
@@ -178,7 +183,7 @@ angular.module('cesiLib',[])
              });
              return deferred.promise;
 
-             /*return $http.get('http://192.168.1.155:5000/node/srv2/process/'+process.name+':'+process.group+'/stop')*/
+             //return $http.get('http://127.0.0.1:5000/node/srv2/process/'+process.name+':'+process.group+'/stop')
          }
      };
 

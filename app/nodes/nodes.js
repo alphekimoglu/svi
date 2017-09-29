@@ -10,41 +10,71 @@ angular.module('myApp.nodes', ['ngRoute', 'cesiLib'])
 }])
 
 .controller('NodesCtrl', ['$scope','cesiService', function($scope, cesiService){
+    $scope.nodelist=[];
+    $scope.nodes=[];
+    $scope.flag = [];
 
-    $scope.processes = [];
-    $scope.nodes = [];
-    $scope.list = function () {
-       cesiService.list().then(function (data) {
-          $scope.nodes = data.node_name_list;
-       });
-    };
-    $scope.list();
 
-    $scope.load= function () {
-        cesiService.load().then(function (data) {
-            $scope.processes = data.process_info;
+    $scope.reload= function (index) {
+        cesiService.reload($scope.nodelist[index]).then(function (data) {
+            $scope.nodes[index]=[];
+            $scope.nodes[index]= data.process_info;
         });
+    };
+
+
+    $scope.load = function () {
+
+       cesiService.load().then(function (data) {
+          $scope.nodelist = data.node_name_list;
+           angular.forEach($scope.nodelist,function (value,key) {
+
+               $scope.reload(key);
+           });
+
+       });
+
     };
     $scope.load();
 
 
-    $scope.restart= function(process){
-        cesiService.restart(process).then(function () {
-            $scope.load();
+
+
+
+    $scope.restart= function(index,node,process){
+        $scope.flag[index]=true;
+        cesiService.restart(node,process).then(function () {
+            $scope.reload(index);
+            $scope.flag[index] =false;
         });
     };
 
-    $scope.start = function (process) {
-        cesiService.start(process).then(function () {
-            $scope.load();
+    $scope.start = function (index,node,process) {
+        $scope.flag[index]=true;
+        cesiService.start(node,process).then(function () {
+            $scope.reload(index);
+            $scope.flag[index]=false;
         });
     };
 
-    $scope.stop = function (process) {
-        cesiService.stop(process).then(function () {
-            $scope.load();
+    $scope.stop = function (index,node,process) {
+        $scope.flag[index]=true;
+        cesiService.stop(node,process).then(function () {
+            $scope.reload(index);
+            $scope.flag[index]=false;
         });
     };
+
+
+
+
+
+
+
+
+
+
+
  /*
   $scope.stop= function (process) {
       $http({
