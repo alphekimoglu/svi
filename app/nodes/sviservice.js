@@ -36,6 +36,18 @@ angular.module('cesiLib',[])
              return  deferred.promise;
          },
 
+        userInfo : function () {
+             var deferred =$q.defer();
+             $http.get('http://192.168.1.155:5000/userinfo')
+             .then(function (response) {
+                 deferred.resolve(response.data);
+             })
+             .catch(function (response) {
+                 deferred.reject(response);
+             });
+             return  deferred.promise;
+         },
+
          getusers : function () {
              var deferred =$q.defer();
              $http.get('http://192.168.1.155:5000/delete/user')

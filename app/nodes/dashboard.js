@@ -27,10 +27,6 @@ dashboard.controller('DashboardCtrl', ['cesiService', '$scope', '$rootScope', fu
       $scope.process.processCount = data['all_process_count'];
       $scope.process.running = data['running_process_count'];
       $scope.process.stoped = data['stopped_process_count'];
-      document.getElementById('username').innerHTML = data['username'];
-      $rootScope.username = data['username'];
-      $rootScope.usertype = data['usertype'];
-      document.getElementById('show-account').innerHTML = data['username'] + " (" + data['usertype'] + ")";
       refreshButton.disabled = false;
       refreshButton.innerHTML = "<strong>Refresh</strong>";
     });
