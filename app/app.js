@@ -7,13 +7,13 @@ var interceptor = function ($q, $location) {
   },
 
   response: function (result) {//res
-    console.log('Repos:');
-    console.log(result);
+    //console.log('Repos:');
+    //console.log(result);
     return result;
   },
 
   responseError: function (rejection) {//error
-    console.log('Failed with', rejection.status, 'status');
+    //console.log('Failed with', rejection.status, 'status');
       if (rejection.status == 403) {
           $location.url('/login');
       }

@@ -3,12 +3,12 @@ angular.module('cesiLib',[])
 
 
 .factory('cesiService',['$http','$q', function($http,$q) {
-     var path = 'http://192.168.1.155:5000/node/';
+     var path = 'http://192.168.1.155:5000/';
      return {
 
         dashboard : function () {
              var deferred =$q.defer();
-             $http.get('http://192.168.1.155:5000/dashboard')
+             $http.get(path+'dashboard')
              .then(function (response) {
                  deferred.resolve(response.data);
              })
@@ -19,11 +19,11 @@ angular.module('cesiLib',[])
          },
 
          changepassword : function (data) {
-             console.log($.param(data));
+             //console.log($.param(data));
              var deferred =$q.defer();
              $http({
                 method: 'POST',
-                url: 'http://192.168.1.155:5000/change/password/' + ($rootScope.username || "") + '/handler',
+                url: path+'change/password/' + ($rootScope.username || "") + '/handler',
                 data: $.param(data),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
              })
@@ -38,7 +38,7 @@ angular.module('cesiLib',[])
 
          getusers : function () {
              var deferred =$q.defer();
-             $http.get('http://192.168.1.155:5000/delete/user')
+             $http.get(path+'delete/user')
              .then(function (response) {
                  deferred.resolve(response.data);
              })
@@ -50,7 +50,7 @@ angular.module('cesiLib',[])
 
         deleteuser : function (username) {
              var deferred =$q.defer();
-             $http.get('http://192.168.1.155:5000/delete/user/' + username)
+             $http.get(path+'delete/user/' + username)
              .then(function (response) {
                  deferred.resolve(response.data);
              })
@@ -62,7 +62,7 @@ angular.module('cesiLib',[])
 
          log : function () {
              var deferred =$q.defer();
-             $http.get('http://192.168.1.155:5000/activitylog')
+             $http.get(path+'activitylog')
              .then(function (response) {
                  deferred.resolve(response.data);
              })
@@ -74,7 +74,7 @@ angular.module('cesiLib',[])
 
          reload : function (node) {
              var deferred =$q.defer();
-             $http.get(path+node)
+             $http.get(path+'node/'+node)
              .then(function (response) {
 
                  deferred.resolve(response.data);
@@ -86,11 +86,11 @@ angular.module('cesiLib',[])
          },
 
          login : function (data) {
-            console.log($.param(data));
+            //console.log($.param(data));
              var deferred =$q.defer();
              $http({
                 method: 'POST',
-                url: 'http://192.168.1.155:5000/login/control',
+                url: path+'login/control',
                 data: $.param(data),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
              })
@@ -104,11 +104,11 @@ angular.module('cesiLib',[])
          },
 
          add : function (data) {
-            console.log($.param(data));
+            //console.log($.param(data));
              var deferred =$q.defer();
              $http({
                 method: 'POST',
-                url: 'http://192.168.1.155:5000/add/user/handler',
+                url: path+'add/user/handler',
                 data: $.param(data),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
              })
@@ -123,7 +123,7 @@ angular.module('cesiLib',[])
 
          logout : function () {
              var deferred =$q.defer();
-             $http.get('http://192.168.1.155:5000/logout')
+             $http.get(path+'logout')
              .then(function (response) {
                  deferred.resolve(response.data);
              })
@@ -135,7 +135,7 @@ angular.module('cesiLib',[])
 
          load : function () {
              var deferred =$q.defer();
-             $http.get(path+'name/list')
+             $http.get(path+'node/name/list')
              .then(function (response) {
 
 
@@ -150,7 +150,7 @@ angular.module('cesiLib',[])
 
          restart : function (node,process) {
              var deferred =$q.defer();
-             $http.get(path+node+'/process/'+process.name+':'+process.group+'/restart')
+             $http.get(path+'node/'+node+'/process/'+process.name+':'+process.group+'/restart')
              .then(function (response) {
                 deferred.resolve(response);
              })
@@ -162,7 +162,7 @@ angular.module('cesiLib',[])
          
          start : function (node,process) {
              var deferred =$q.defer();
-             $http.get(path+node+'/process/'+process.name+':'+process.group+'/start')
+             $http.get(path+'node/'+node+'/process/'+process.name+':'+process.group+'/start')
              .then(function (response) {
                 deferred.resolve(response);
              })
@@ -174,7 +174,7 @@ angular.module('cesiLib',[])
 
          stop : function (node,process) {
              var deferred =$q.defer();
-             $http.get(path+node+'/process/'+process.name+':'+process.group+'/stop')
+             $http.get(path+'node/'+node+'/process/'+process.name+':'+process.group+'/stop')
              .then(function (response) {
                 deferred.resolve(response);
              })
