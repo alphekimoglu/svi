@@ -45,17 +45,6 @@ angular.module('myApp.nodes', ['ngRoute', 'cesiLib'])
             $scope.load();
         });
     };
-
-
-
-
-
-
-
-
-
-
-
  /*
   $scope.stop= function (process) {
       $http({

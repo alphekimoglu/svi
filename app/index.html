@@ -88,17 +88,29 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                           <a href="">
-                               Account
-                            </a>
+                           <li class="dropdown">
+                              <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <p id="username">
+                                        Account
+                                        <b class="caret"></b>
+                                    </p>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li><a id="show-account" href=""><i class="fa fa-user fa-fw"></i> 123(Admin) </a></li>
+                                <li><a name="123" href="#!/changePassword" class="changepassword"><i class="glyphicon glyphicon-wrench"></i> Change Password </a></li>
+                                
+                                <li class="divider"></li>
+                                <li><a href="#!/addUser" class="adduser"><i class="glyphicon glyphicon-plus"></i> Add User </a></li>
+                                <li><a href="#!/deleteUser" class="deluser"><i class="glyphicon glyphicon-trash"></i> Delete User </a></li>
+                                
+                                <li class="divider"></li>
+                                <li><a href="#!/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+                              </ul>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-
-
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -106,40 +118,8 @@
                 </div>
             </div>
         </div>
-
-
-        <footer class="footer">
-            <div class="container-fluid">
-                <nav class="pull-left">
-                    <ul>
-                        <li>
-                            <a href="#">
-
-                            </a>
-                        </li>
-
-                    </ul>
-                </nav>
-                <p class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
-                </p>
-            </div>
-        </footer>
-
     </div>
-
   </div>
-
-
-
-
-
-
-
-
-
-
-
 <!--<div class="shadow"></div>-->
 
   <!-- In production use:
@@ -153,6 +133,8 @@
   <script src="app.js"></script>
   <script src="nodes/sviservice.js"></script>
   <script src="nodes/nodes.js"></script>
+  <script src="nodes/navbar.js"></script>
+  <script src="nodes/dashboard.js"></script>
   <script src="groups/groups.js"></script>
   <script src="dashboard/dashboard.js"></script>
   <!--<script src="dashboard/dashboard.js"></script>-->
@@ -169,13 +151,10 @@
 	<!--  Charts Plugin -->
 	<script src="js/chartist.min.js"></script>
 
-    <!--  Notifications Plugin    -->
-    <script src="js/bootstrap-notify.js"></script>
+  <!--  Notifications Plugin    -->
+  <script src="js/bootstrap-notify.js"></script>
 
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-
-    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+  <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
 	<!--<script src=js/light-bootstrap-dashboard.js"></script>-->
 
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
