@@ -3,50 +3,40 @@
 <html ng-app="myApp">
 <head>
     <link rel="stylesheet" href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
+    <link rel="stylesheet" href="ng-table.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <div ng-controller="NodesCtrl" class="content">
-        <div class="containter-fluid">
+        <td><input type="button" value="Refresh"  ng-click="load()" ng-disabled="mainflag"></td>
+        <div ng-repeat="(key1,value1) in nodelist">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12" ng-controller="NodesCtrl">
 
-                    <td><input type="button" value="Refresh" ng-click="load()" ng-disabled="flag"></td>
-                    <div ng-repeat="(key1,value1) in nodelist" class="card">
+                    <table ng-table="tableParams[key1]" class="table table-condensed table-bordered table-striped">
 
-                        <div class="header">
 
                             <h4 class="title">Processes for {{value1}}</h4>
 
-                        </div>
-                        <div class="content table-responsive table-full-width">
-                            <table class="table table-hover table-striped">
-                                <thead>
-                                    <th>Name</th>
-                                    <th>Pid</th>
-                                    <th>Group</th>
-                                    <th>Uptime</th>
-                                    <th>State</th>
-                                </thead>
-                                <tbody>
-                                    <tr  ng-repeat="(key2,value2) in nodes[key1]">
-                                        <td data-title="Name" filter="{ name: 'text'}" sortable="'name'">{{value2.name}}</td>
-                                        <td data-title="Pid" filter="{ pid: 'number'}" sortable="'pid'">{{value2.pid}}</td>
-                                        <td data-title="Group" filter="{ group: 'text'}" sortable="'group'">{{value2.group}}</td>
-                                        <td data-title="Uptime" filter="{ uptime: 'time'}" sortable="'uptime'">{{value2.uptime}}</td>
-                                        <td data-title="State" filter="{ state: 'text'}" sortable="'state'">{{value2.statename}}</td>
-                                        <td><input type="button" value="Restart"  ng-click="restart(key1,value1,value2)" ng-disabled="flag[key1]"></td>
-                                        <td><input type="button" value="Start" ng-click="start(key1,value1,value2)" ng-disabled="flag[key1]"></td>
-                                        <td><input type="button" value="Stop" ng-click="stop(key1,value1,value2)" ng-disabled="flag[key1]"></td>
+                                    <tr  ng-repeat="row in $data">
+
+                                        <td data-title="'Name'" filter="{ name: 'text'}" sortable="'name'">{{row.name}}</td>
+                                        <td data-title="'Pid'" filter="{ pid: 'number'}" sortable="'pid'">{{row.pid}}</td>
+                                        <td data-title="'Group'" filter="{ group: 'text'}" sortable="'group'">{{row.group}}</td>
+                                        <td data-title="'State'" filter="{ state: 'text'}" sortable="'state'">{{row.statename}}</td>
+                                        <td data-title="'Uptime'" filter="{ uptime: 'text'}" sortable="'Date'">{{uptime(row.start)| date:'HH:mm:ss'}}</td>
+                                        </div>
+                                        <td><input type="button" value="Restart"  ng-click="restart(key1,value1,row)" ng-disabled="flag[key1]"></td>
+                                        <td><input type="button" value="Start" ng-click="start(key1,value1,row)" ng-disabled="flag[key1]"></td>
+                                        <td><input type="button" value="Stop" ng-click="stop(key1,value1,row)" ng-disabled="flag[key1]"></td>
                                     </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </li>
+
+                    </table>
                 </div>
+
+
             </div>
         </div>
-    </div>
+
 </body>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.js"></script>
   <script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
@@ -55,6 +45,7 @@
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="app.js"></script>
   <script src="nodes/sviservice.js"></script>
+  <script src="moment-with-locales.min.js"></script>
 
   <script src="nodes/nodes.js"></script>
   <script src="groups/groups.js"></script>
@@ -77,6 +68,7 @@
 
     <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-
+    <script src="ng-table.min.js"></script>
+    <script src="ng-table.js"></script>
 
 </html>

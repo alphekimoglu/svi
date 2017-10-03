@@ -1,0 +1,36 @@
+{
+  "process_info": [
+    {
+      "description": "pid 15871, uptime 0:12:31", 
+      "exitstatus": 0, 
+      "group": "srv3123", 
+      "logfile": "/var/log/cesi-testsrv1-stdout.log", 
+      "name": "srv1", 
+      "now": 1506953290, 
+      "pid": 15871, 
+      "spawnerr": "", 
+      "start": 1506952539, 
+      "state": 20, 
+      "statename": "RUNNING", 
+      "stderr_logfile": "/var/log/cesi-testsrv1-stderr.log", 
+      "stdout_logfile": "/var/log/cesi-testsrv1-stdout.log", 
+      "stop": 1506952539
+    }, 
+    {
+      "description": "pid 15673, uptime 0:15:53", 
+      "exitstatus": 0, 
+      "group": "srv4", 
+      "logfile": "/var/log/cesi-testsrv2-stdout.log", 
+      "name": "srv2", 
+      "now": 1506953290, 
+      "pid": 15673, 
+      "spawnerr": "", 
+      "start": 1506952337, 
+      "state": 20, 
+      "statename": "RUNNING", 
+      "stderr_logfile": "/var/log/cesi-testsrv2-stderr.log", 
+      "stdout_logfile": "/var/log/cesi-testsrv2-stdout.log", 
+      "stop": 1506951656
+    }
+  ]
+}

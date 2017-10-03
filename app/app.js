@@ -25,6 +25,7 @@ var interceptor = function ($q, $location) {
 angular.module('myApp', [
   'ngRoute',
   'cesiLib',
+  'ngTable',
   'myApp.dashboard',
   'myApp.dashboards',
   'myApp.nodes',

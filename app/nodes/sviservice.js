@@ -83,7 +83,7 @@ angular.module('cesiLib',[])
              });
              return  deferred.promise;
          },
-
+         /*Service function that makes http get call to backend for a node which is given by controller reload function to load status of that node*/
          reload : function (node) {
              var deferred =$q.defer();
              $http.get(path+'node/'+node)
@@ -159,7 +159,7 @@ angular.module('cesiLib',[])
              return  deferred.promise;
          },
 
-
+         /*Service function that makes http get call to backend to restart a process of node which is given by controller restart function*/
          restart : function (node,process) {
              var deferred =$q.defer();
              $http.get(path+'node/'+node+'/process/'+process.name+':'+process.group+'/restart')
@@ -171,7 +171,7 @@ angular.module('cesiLib',[])
              });
              return deferred.promise;
          },
-         
+         /*Service function that makes http get call to backend to start a process(stopped) of node which is given by controller start function*/
          start : function (node,process) {
              var deferred =$q.defer();
              $http.get(path+'node/'+node+'/process/'+process.name+':'+process.group+'/start')
@@ -183,7 +183,7 @@ angular.module('cesiLib',[])
              });
              return deferred.promise;
          },
-
+         /*Service function that makes http get call to backend to stop a process(running) of node which is given by controller stop function*/
          stop : function (node,process) {
              var deferred =$q.defer();
              $http.get(path+'node/'+node+'/process/'+process.name+':'+process.group+'/stop')
